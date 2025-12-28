@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { getWholesalerOrders } from "../../api/order";
-import { updateOrderStatus } from "../../api/order";
+import { getWholesalerOrders, updateOrderStatus } from "../../api/order";
+import Layout from "../../components/Layout";
 
 export default function WholesalerDashboard() {
   const [orders, setOrders] = useState([]);
@@ -10,7 +10,7 @@ export default function WholesalerDashboard() {
   }, []);
 
   return (
-    <div>
+    <Layout role="wholesaler">
       <h2>Orders Received</h2>
 
       {orders.map((o) => (
@@ -19,17 +19,18 @@ export default function WholesalerDashboard() {
           <p><b>Retailer:</b> {o.retailer.name}</p>
           <p><b>Quantity:</b> {o.quantity}</p>
           <p><b>Status:</b> {o.status}</p>
-          <hr />
+
           <button onClick={() => updateOrderStatus(o._id, "accepted")}>
-  Accept
-</button>
+            Accept
+          </button>
 
-<button onClick={() => updateOrderStatus(o._id, "rejected")}>
-  Reject
-</button>
+          <button onClick={() => updateOrderStatus(o._id, "rejected")}>
+            Reject
+          </button>
 
+          <hr />
         </div>
       ))}
-    </div>
+    </Layout>
   );
 }

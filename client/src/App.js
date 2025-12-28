@@ -6,43 +6,58 @@ import PrivateRoute from "./routes/PrivateRoute";
 
 import RetailerDashboard from "./pages/retailer/RetailerDashboard";
 import WholesalerDashboard from "./pages/wholesaler/WholesalerDashboard";
+import "./styles/layout.css";
+import AddMedicine from "./pages/wholesaler/AddMedicine";
+
+
+
 
 function App() {
   return (
     <BrowserRouter>
-      <Routes>
+  <Routes>
 
-        <Route path="/" element={<Login />} />
+    <Route path="/" element={<Login />} />
 
-        <Route
-          path="/profile"
-          element={
-            <PrivateRoute>
-              <Profile />
-            </PrivateRoute>
-          }
-        />
+    <Route
+      path="/profile"
+      element={
+        <PrivateRoute>
+          <Profile />
+        </PrivateRoute>
+      }
+    />
 
-        <Route
-          path="/retailer/dashboard"
-          element={
-            <PrivateRoute>
-              <RetailerDashboard />
-            </PrivateRoute>
-          }
-        />
+    <Route
+      path="/retailer/dashboard"
+      element={
+        <PrivateRoute>
+          <RetailerDashboard />
+        </PrivateRoute>
+      }
+    />
 
-        <Route
-          path="/wholesaler/dashboard"
-          element={
-            <PrivateRoute>
-              <WholesalerDashboard />
-            </PrivateRoute>
-          }
-        />
+    <Route
+      path="/wholesaler/dashboard"
+      element={
+        <PrivateRoute>
+          <WholesalerDashboard />
+        </PrivateRoute>
+      }
+    />
 
-      </Routes>
-    </BrowserRouter>
+    <Route
+      path="/wholesaler/AddMedicine"
+      element={
+        <PrivateRoute>
+          <AddMedicine />
+        </PrivateRoute>
+      }
+    />
+
+  </Routes>
+</BrowserRouter>
+
   );
 }
 
