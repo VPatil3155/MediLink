@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { addMedicine } from "../../api/medicine";
 import Layout from "../../components/Layout";
+import { addMedicine } from "../../api/medicine";
+import "./addMedicine.css";
 
 export default function AddMedicine() {
   const [form, setForm] = useState({
@@ -9,44 +10,66 @@ export default function AddMedicine() {
     stock: "",
   });
 
+  const [message, setMessage] = useState("");
+
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await addMedicine(form);
-    alert("Medicine added");
+
+    if (!form.name || !form.price || !form.stock) {
+      setMessage("All fields are required");
+      return;
+    }
+
+    try {
+      await addMedicine(form);
+      setMessage("Medicine added successfully");
+      setForm({ name: "", price: "", stock: "" });
+    } catch (error) {
+      setMessage("Failed to add medicine");
+    }
   };
 
   return (
-    <Layout role="wholesaler">
-      <h2>Add Medicine</h2>
+    <Layout>
+      <div className="page">
+        <h2 className="page-title">Add Medicine</h2>
 
-      <form onSubmit={handleSubmit}>
-        <input
-          name="name"
-          placeholder="Medicine name"
-          onChange={handleChange}
-        />
-        <br />
+        <form className="form-card" onSubmit={handleSubmit}>
+          <label>Medicine Name</label>
+          <input
+            name="name"
+            value={form.name}
+            onChange={handleChange}
+            placeholder="Paracetamol"
+          />
 
-        <input
-          name="price"
-          placeholder="Price"
-          onChange={handleChange}
-        />
-        <br />
+          <label>Price (₹)</label>
+          <input
+            name="price"
+            type="number"
+            value={form.price}
+            onChange={handleChange}
+            placeholder="20"
+          />
 
-        <input
-          name="stock"
-          placeholder="Stock"
-          onChange={handleChange}
-        />
-        <br />
+          <label>Stock</label>
+          <input
+            name="stock"
+            type="number"
+            value={form.stock}
+            onChange={handleChange}
+            placeholder="100"
+          />
 
-        <button type="submit">Add</button>
-      </form>
+          <button type="submit">Add Medicine</button>
+
+          {message && <p className="form-message">{message}</p>}
+        </form>
+      </div>
     </Layout>
   );
 }

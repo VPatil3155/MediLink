@@ -6,7 +6,9 @@ export default function Sidebar({ role }) {
       <p className="menu-title">Menu</p>
 
       {role === "retailer" && (
-        <Link to="/retailer/dashboard">Medicines</Link>
+        <>
+          <Link to="/retailer/dashboard">Medicines</Link>
+        </>
       )}
 
       {role === "wholesaler" && (

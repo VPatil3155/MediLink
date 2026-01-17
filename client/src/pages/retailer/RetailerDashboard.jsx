@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getMedicines } from "../../api/medicine";
 import Layout from "../../components/Layout";
+import "./dashboard.css";
 
 export default function RetailerDashboard() {
   const [medicines, setMedicines] = useState([]);
@@ -12,18 +13,31 @@ export default function RetailerDashboard() {
   }, []);
 
   return (
-  <Layout role="retailer">
-    <h2>Available Medicines</h2>
+    <Layout>
+ 
+      <div className="page">
+        <h2 className="page-title">Available Medicines</h2>
+             {medicines.length === 0 && (
+  <p>No medicines available right now.</p>
+)}
+        <div className="stats">
+          <div className="stat-card">
+            <h4>Total Medicines</h4>
+            <p>{medicines.length}</p>
+          </div>
+        </div>
 
-    {medicines.map((m) => (
-      <div key={m._id}>
-        <h4>{m.name}</h4>
-        <p>Price: ₹{m.price}</p>
-        <p>Stock: {m.stock}</p>
-        <p>Wholesaler: {m.wholesaler?.name}</p>
-        <hr />
+        <div className="card-grid">
+          {medicines.map((m) => (
+            <div className="card" key={m._id}>
+              <h3>{m.name}</h3>
+              <p><b>Price:</b> ₹{m.price}</p>
+              <p><b>Stock:</b> {m.stock}</p>
+              <p><b>Wholesaler:</b> {m.wholesaler?.name}</p>
+            </div>
+          ))}
+        </div>
       </div>
-    ))}
-  </Layout>
-);
+    </Layout>
+  );
 }
