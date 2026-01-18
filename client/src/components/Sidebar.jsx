@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 
 export default function Sidebar({ role }) {
+    console.log("SIDEBAR ROLE 👉", role);
+
   return (
     <div className="sidebar">
       <p className="menu-title">Menu</p>

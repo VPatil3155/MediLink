@@ -4,7 +4,7 @@ import { useAuth } from "../context/AuthContext";
 
 export default function Layout({ children }) {
   const { user } = useAuth();   // 👈 get logged-in user
-
+console.log("LOGGED USER ROLE 👉", user?.role);
   return (
     <div className="layout">
       <Navbar />
