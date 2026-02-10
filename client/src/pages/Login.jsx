@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../api/axios";
 import { useAuth } from "../context/AuthContext";
+import "./login.css";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -36,9 +37,10 @@ export default function Login() {
     }
   };
 
-  return (
-    <form onSubmit={handleSubmit}>
-      <h2>Login</h2>
+ return (
+  <div className="login-page">
+    <form className="login-card" onSubmit={handleSubmit}>
+      <h2 className="login-title">MediLink Login</h2>
 
       <input
         type="email"
@@ -46,6 +48,7 @@ export default function Login() {
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         required
+        className="login-input"
       />
 
       <input
@@ -54,9 +57,14 @@ export default function Login() {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
         required
+        className="login-input"
       />
 
-      <button type="submit">Login</button>
+      <button type="submit" className="login-btn">
+        Login
+      </button>
     </form>
-  );
+  </div>
+);
+
 }

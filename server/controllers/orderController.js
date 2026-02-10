@@ -58,6 +58,10 @@ exports.updateOrderStatus = async (req, res) => {
       { status },
       { new: true }
     );
+    // if (medicine.stock === 0) {
+    //   medicine.isActive = false;
+    // }
+    // await medicine.save();
 
     res.json(order);
   } catch (error) {

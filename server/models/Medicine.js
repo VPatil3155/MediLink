@@ -18,8 +18,14 @@ const medicineSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "User"
     }
+    ,
+    // isActive: {
+    //   type: Boolean,
+    //   default: true
+    // }
   },
   { timestamps: true }
+  
 );
 
 module.exports = mongoose.model("Medicine", medicineSchema);

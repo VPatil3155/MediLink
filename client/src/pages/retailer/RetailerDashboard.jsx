@@ -38,29 +38,36 @@ export default function RetailerDashboard() {
               <p><b>Stock:</b> {m.stock}</p>
               <p><b>Wholesaler:</b> {m.wholesaler?.name}</p>
 
-              <input
-                type="number"
-                min="1"
-                placeholder="Quantity"
-                onChange={(e) =>
-                  setQuantities({
-                    ...quantities,
-                    [m._id]: e.target.value,
-                  })
-                }
-              />
+      <input
+  type="number"
+  min="1"
+  placeholder="Quantity"
+  value={quantities[m._id] || ""}
+  onChange={(e) =>
+    setQuantities({
+      ...quantities,
+      [m._id]: e.target.value,
+    })
+  }
+/>
 
-              <button
-                className="btn"
-                onClick={() =>
-                  placeOrder({
-                    medicineId: m._id,
-                    quantity: Number(quantities[m._id] || 1),
-                  })
-                }
-              >
-                Place Order
-              </button>
+<button
+  className="btn"
+  onClick={async () => {
+    await placeOrder({
+      medicineId: m._id,
+      quantity: Number(quantities[m._id] || 1),
+    });
+
+    setQuantities({
+      ...quantities,
+      [m._id]: "",
+    });
+  }}
+>
+  Place Order
+</button>
+
             </div>
           ))}
         </div>
